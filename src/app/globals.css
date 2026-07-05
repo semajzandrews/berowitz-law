@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   LAW OFFICE OF STEPHEN S. BEROWITZ — "The Engagement Letter"
+   A single sheet of counsel: the site is typeset as one formal
+   letter on laid paper — monogram seal, drawn brass rule,
+   letterpressed name, ragged-right body. Restraint IS the design;
+   the craft is in the paper, the rules, and the type.
+   Bespoke Serif (display) + Amulya (body) — first board use.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --paper: #f3eee3;      /* laid stock */
+  --paper-2: #ebe4d4;
+  --navy: #1c2a3a;       /* iron-gall ink */
+  --navy-2: #33435a;
+  --navy-3: #4a5a70;     /* 5.0+:1 on paper */
+  --brass: #8a6a3b;      /* dull document brass */
+  --brass-2: #6e5330;    /* small text brass, 5.6:1 */
+  --line: rgba(28, 42, 58, 0.16);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-3: var(--navy-3);
+  --color-brass: var(--brass);
+  --color-brass-2: var(--brass-2);
+  --font-display: var(--font-bespoke);
+  --font-body: var(--font-amulya);
+}
+
+html { background: var(--navy); }
+body {
+  font-family: var(--font-amulya), Georgia, serif;
+  font-size: 17.5px;
+  line-height: 1.72;
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* the sheet itself — the whole site lives on one letter */
+.sheet {
+  background:
+    /* laid-paper texture: faint horizontal chain lines, pure CSS */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 27px,
+      rgba(28, 42, 58, 0.025) 27px,
+      rgba(28, 42, 58, 0.025) 28px
+    ),
+    var(--paper);
+  box-shadow: 0 0 0 1px rgba(28,42,58,0.08), 0 30px 80px -20px rgba(10,16,24,0.55);
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-bespoke), Georgia, serif;
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+/* letterpress: the name reads as pressed into the stock */
+.pressed {
+  color: var(--navy);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55),
+    0 -1px 0 rgba(28, 42, 58, 0.28);
+  letter-spacing: 0.01em;
+}
+
+.smallcaps {
+  font-family: var(--font-amulya);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass-2);
+}
+
+/* the brass rule that draws itself in on load */
+.rule-draw {
+  display: block;
+  width: 100%;
+  height: 22px;
+}
+.rule-draw line, .rule-draw circle {
+  stroke: var(--brass);
+}
+.rule-draw .draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: rule-in 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
+@keyframes rule-in {
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rule-draw .draw { animation: none; stroke-dashoffset: 0; }
+}
+
+.btn-navy {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--navy);
+  color: var(--paper);
+  font-family: var(--font-amulya);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 1rem 2.1rem;
+  border-radius: 2px;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.btn-navy:hover { background: var(--navy-2); transform: translateY(-1px); }
+
+.map-frame {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--line);
+}
+.map-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map-frame::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(28,42,58,0.22), transparent 40%), rgba(138,106,59,0.06);
+}
+
+.callpill {
+  position: fixed; bottom: 1.3rem; right: 1.3rem; z-index: 100;
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  background: var(--navy); color: var(--paper);
+  border-radius: 999px; padding: 0.9rem 1.35rem;
+  font-weight: 500; font-size: 0.95rem; text-decoration: none;
+  box-shadow: 0 12px 30px -8px rgba(10,16,24,0.5);
+}
+@media (max-width: 480px) {
+  .callpill { width: 48px; height: 48px; padding: 0; justify-content: center; border-radius: 50%; }
+  .callpill-label { display: none; }
+}
+
+.rv { opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+.rv.rv-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
