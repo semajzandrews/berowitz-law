@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://berowitz-law.vercel.app"),
   title: "Law Office of Stephen S. Berowitz · Bloomfield, NJ",
   description:
-    "A Bloomfield law practice at 299 Glenwood Ave. Call (973) 743-7753 to discuss your matter.",
+    "A Bloomfield law practice at 299 Glenwood Ave. Call or text (973) 743-7753 to discuss your matter.",
   openGraph: {
     title: "Law Office of Stephen S. Berowitz",
-    description: "A Bloomfield, NJ law practice. Call (973) 743-7753.",
+    description: "A Bloomfield, NJ law practice. Call or text (973) 743-7753.",
     locale: "en_US",
     type: "website",
   },

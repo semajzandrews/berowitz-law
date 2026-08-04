@@ -124,9 +124,63 @@ h1, h2, h3, .display {
   background: linear-gradient(to top, rgba(28,42,58,0.22), transparent 40%), rgba(138,106,59,0.06);
 }
 
+/* the second door: a letter-styled counterpart to the navy button */
+.btn-letter {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: transparent;
+  color: var(--brass-2);
+  font-family: var(--font-amulya);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 1rem 1.9rem;
+  border: 1px solid var(--brass);
+  border-radius: 2px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-letter:hover { background: rgba(138, 106, 59, 0.09); color: var(--navy); }
+
+/* Call-or-Text: the chooser reads as a small enclosure card on the same stock,
+   opening UPWARD out of the fixed pill so it never leaves the viewport. */
+.cot { position: fixed; bottom: 1.3rem; right: 1.3rem; z-index: 100; }
+.cot-card {
+  position: absolute; bottom: calc(100% + 0.7rem); right: 0;
+  width: max-content; min-width: 236px;
+  background: var(--paper);
+  border: 1px solid var(--brass);
+  border-radius: 2px;
+  padding: 0.75rem 0.6rem 0.5rem;
+  box-shadow: 0 18px 44px -16px rgba(10, 16, 24, 0.55);
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .32s cubic-bezier(.22,1,.36,1), transform .32s cubic-bezier(.22,1,.36,1);
+}
+.cot-card[data-open="true"] { opacity: 1; transform: none; pointer-events: auto; }
+.cot-head {
+  font-family: var(--font-amulya);
+  font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--brass-2);
+  padding: 0 0.65rem 0.55rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0.35rem;
+}
+.cot-card a {
+  display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0.65rem;
+  color: var(--navy); text-decoration: none;
+  transition: background .22s ease;
+}
+.cot-card a:hover { background: var(--paper-2); }
+.cot-card strong {
+  display: block; font-family: var(--font-bespoke), Georgia, serif;
+  font-weight: 500; font-size: 15px; line-height: 1.25;
+}
+.cot-card em {
+  display: block; font-style: normal; font-size: 12.5px;
+  color: var(--navy-3); margin-top: 1px;
+}
+
 .callpill {
-  position: fixed; bottom: 1.3rem; right: 1.3rem; z-index: 100;
   display: inline-flex; align-items: center; gap: 0.55rem;
+  border: 0; cursor: pointer;
   background: var(--navy); color: var(--paper);
   border-radius: 999px; padding: 0.9rem 1.35rem;
   font-weight: 500; font-size: 0.95rem; text-decoration: none;

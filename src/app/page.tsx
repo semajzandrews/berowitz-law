@@ -1,7 +1,12 @@
 import Reveal from "@/components/Reveal";
+import CallOrText from "@/components/CallOrText";
+import { formatPhone, telHref } from "@/lib/phone";
 
-const PHONE = "(973) 743-7753";
-const TEL = "tel:+19737437753";
+/* one digits-only constant; display and hrefs both derive from it */
+const PHONE_DIGITS = "9737437753";
+const PHONE = formatPhone(PHONE_DIGITS);
+const TEL = telHref(PHONE_DIGITS);
+const SMS_BODY = "Hello, I would like to ask about a legal matter. ";
 const ADDRESS = "299 Glenwood Ave #2, Bloomfield, NJ 07003";
 
 /* One sheet of counsel. Every fact on this page is verified lead data:
@@ -21,16 +26,8 @@ function BrassRule() {
 export default function Home() {
   return (
     <main className="flex-1 py-6 sm:py-12 md:py-16">
-      {/* fixed call pill */}
-      <a href={TEL} className="callpill" aria-label={`Call the Law Office of Stephen S. Berowitz at ${PHONE}`}>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M6.6 3h2.9l1.4 4.1-2 1.5a13.6 13.6 0 0 0 6.5 6.5l1.5-2 4.1 1.4v2.9c0 1-.8 1.8-1.8 1.8C10.7 19.2 4.8 13.3 4.8 4.8 4.8 3.8 5.6 3 6.6 3Z"
-            fill="currentColor"
-          />
-        </svg>
-        <span className="callpill-label">{PHONE}</span>
-      </a>
+      {/* fixed call-or-text pill */}
+      <CallOrText phone={PHONE_DIGITS} smsBody={SMS_BODY} />
 
       {/* THE SHEET */}
       <article className="sheet mx-auto w-full max-w-3xl px-6 py-14 sm:px-12 sm:py-20 md:px-16">
@@ -95,9 +92,7 @@ export default function Home() {
         <Reveal delay={120}>
           <section className="mt-14 text-center">
             <p className="smallcaps mb-5">To Discuss Your Matter</p>
-            <a href={TEL} className="btn-navy">
-              Call {PHONE}
-            </a>
+            <CallOrText phone={PHONE_DIGITS} smsBody={SMS_BODY} variant="inline" />
             <p className="mt-4 text-sm text-navy-3">299 Glenwood Ave, Suite 2 · Bloomfield</p>
           </section>
         </Reveal>
